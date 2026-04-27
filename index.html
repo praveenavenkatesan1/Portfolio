@@ -158,5 +158,21 @@
   });
 </script>
     
+<script>
+  (function() {
+    var OLD_URL = 'https://www.behance.net/gallery/217828909/Yulu-Redesign-UX-Project';
+    var NEW_URL = 'https://www.behance.net/gallery/221542281/Yulu-Redesign-UX-Project';
+    function fixLinks() {
+      document.querySelectorAll('a[href="' + OLD_URL + '"]').forEach(function(a) {
+        a.href = NEW_URL;
+      });
+    }
+    // Fix immediately and after any DOM mutations (Framer hydration)
+    fixLinks();
+    var observer = new MutationObserver(fixLinks);
+    observer.observe(document.body || document.documentElement, { childList: true, subtree: true, attributes: true, attributeFilter: ['href'] });
+    window.addEventListener('load', fixLinks);
+  })();
+</script>
 </body>
 </html>
